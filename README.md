@@ -1,1 +1,361 @@
-# GoodtimesNicaragua
+# GoodtimesNicaragua            <!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Good Times Radio</title>
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background: #121212;
+    color: #eee;
+    margin: 0;
+    padding: 0;
+  }
+  header {
+    background: #222;
+    padding: 15px 20px;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #f1c40f;
+    letter-spacing: 3px;
+  }
+  nav {
+    background: #181818;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    padding: 15px 0;
+  }
+  nav a {
+    color: #eee;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+  }
+  nav a:hover, nav a.active {
+    color: #f1c40f;
+  }
+  main {
+    max-width: 960px;
+    margin: 30px auto;
+    padding: 0 15px;
+  }
+  section {
+    display: none;
+  }
+  section.active {
+    display: block;
+  }
+
+  /* Carrusel */
+  .slider {
+    max-width: 900px;
+    margin: 0 auto 30px auto;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+  }
+  .slides {
+    display: flex;
+    transition: 0.5s ease;
+    width: 300%;
+  }
+  .slides img {
+    width: 100%;
+    border-radius: 10px;
+  }
+  .slider-nav {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+  }
+  .slider-nav button {
+    background: rgba(0,0,0,0.5);
+    border: none;
+    color: #f1c40f;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 5px 15px;
+    border-radius: 50%;
+    user-select: none;
+  }
+
+  /* Reproductor de audio */
+  .audio-player {
+    max-width: 900px;
+    margin: 20px auto 40px auto;
+    text-align: center;
+  }
+  audio {
+    width: 100%;
+    outline: none;
+    border-radius: 10px;
+  }
+
+  /* Video YouTube */
+  .video-container {
+    max-width: 900px;
+    margin: 0 auto 40px auto;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  iframe {
+    width: 100%;
+    height: 500px;
+    border: none;
+  }
+
+  /* Programación */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 50px;
+  }
+  th, td {
+    border: 1px solid #444;
+    padding: 12px 15px;
+    text-align: center;
+  }
+  th {
+    background-color: #333;
+    font-weight: 700;
+  }
+  tr:nth-child(even) {
+    background-color: #1e1e1e;
+  }
+  tr:hover {
+    background-color: #2a2a2a;
+  }
+  h2 {
+    color: #f1c40f;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  /* Formulario Contacto */
+  form {
+    max-width: 600px;
+    margin: 0 auto 40px auto;
+    background: #1e1e1e;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #000;
+  }
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    color: #222;
+  }
+  textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+  button {
+    background: #f1c40f;
+    border: none;
+    padding: 12px 25px;
+    color: #121212;
+    font-weight: bold;
+    font-size: 1.1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  button:hover {
+    background: #d4ac0d;
+  }
+
+  /* Contact info */
+  .contact-info {
+    max-width: 600px;
+    margin: 0 auto 40px auto;
+    text-align: center;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #ccc;
+  }
+  .contact-info strong {
+    color: #f1c40f;
+  }
+
+  /* WhatsApp botón flotante */
+  .whatsapp-float {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background-color: #25d366;
+    color: white;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 2px 2px 5px #000;
+    cursor: pointer;
+    z-index: 1000;
+    line-height: 60px;
+  }
+  .whatsapp-float:hover {
+    background-color: #128c45;
+  }
+
+  /* Pie de página */
+  footer {
+    background: #222;
+    color: #777;
+    text-align: center;
+    padding: 15px 10px;
+    font-size: 0.9rem;
+    margin-top: 50px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  Good Times Radio
+</header>
+
+<nav>
+  <a href="#" class="nav-link active" data-target="inicio">Inicio</a>
+  <a href="#" class="nav-link" data-target="programacion">Programación</a>
+  <a href="#" class="nav-link" data-target="contacto">Contacto</a>
+</nav>
+
+<main>
+  <!-- Inicio -->
+  <section id="inicio" class="active">
+    <div class="slider">
+      <div class="slides" id="slides">
+        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=900&q=80" alt="Foto 1" />
+        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=900&q=80" alt="Foto 2" />
+        <img src="https://images.unsplash.com/photo-1497493292307-31c376b6e479?auto=format&fit=crop&w=900&q=80" alt="Foto 3" />
+      </div>
+      <div class="slider-nav">
+        <button onclick="prevSlide()">&#10094;</button>
+        <button onclick="nextSlide()">&#10095;</button>
+      </div>
+    </div>
+
+    <div class="audio-player">
+      <audio controls preload="none">
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg" />
+        Tu navegador no soporta el elemento de audio.
+      </audio>
+    </div>
+
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/YUT-rjAA9VE" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+    </div>
+  </section>
+
+  <!-- Programación -->
+  <section id="programacion">
+    <h2>Programación Semanal</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Día</th>
+          <th>Hora</th>
+          <th>Programa</th>
+          <th>Locutor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Lunes</td><td>8:00 - 10:00 AM</td><td>Morning Vibes</td><td>Juan Pérez</td></tr>
+        <tr><td>Martes</td><td>3:00 - 5:00 PM</td><td>Good Times Hits</td><td>María López</td></tr>
+        <tr><td>Miércoles</td><td>7:00 - 9:00 PM</td><td>Noche de Jazz</td><td>Carlos Gómez</td></tr>
+        <tr><td>Jueves</td><td>6:00 - 8:00 AM</td><td>Despierta con Good Times</td><td>Luisa Fernández</td></tr>
+        <tr><td>Viernes</td><td>9:00 - 11:00 PM</td><td>Fiesta Retro</td><td>Andrés Morales</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Contacto -->
+  <section id="contacto">
+    <h2>Contacto</h2>
+    <form action="https://formspree.io/f/yourformid" method="POST">
+      <label for="name">Nombre</label>
+      <input type="text" id="name" name="name" placeholder="Tu nombre" required />
+      <label for="email">Correo electrónico</label>
+      <input type="email" id="email" name="_replyto" placeholder="Tu correo" required />
+      <label for="message">Mensaje</label>
+      <textarea id="message" name="message" placeholder="Escribe tu mensaje" required></textarea>
+      <button type="submit">Enviar</button>
+    </form>
+
+    <div class="contact-info">
+      <p><strong>Teléfono:</strong> +1 234 567 8900</p>
+      <p><strong>Email:</strong> contacto@goodtimesradio.com</p>
+      <p><strong>Dirección:</strong> Calle Ejemplo 123, Ciudad, País</p>
+    </div>
+  </section>
+</main>
+
+<!-- WhatsApp botón flotante -->
+<a href="https://wa.me/1234567890?text=Hola,%20quiero%20saber%20más%20sobre%20Good%20Times%20Radio" target="_blank" class="whatsapp-float" aria-label="Chat por WhatsApp">
+  &#x2709;
+</a>
+
+<footer>
+  Creado por Good Times © 2025
+</footer>
+
+<script>
+  // Navegación entre secciones
+  const navLinks = document.querySelectorAll('nav a.nav-link');
+  const sections = document.querySelectorAll('main section');
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const target = link.getAttribute('data-target');
+
+      // Quitar clase active de todas las secciones y links
+      sections.forEach(sec => sec.classList.remove('active'));
+      navLinks.forEach(lnk => lnk.classList.remove('active'));
+
+      // Agregar clase active a la sección y link seleccionados
+      document.getElementById(target).classList.add('active');
+      link.classList.add('active');
+    });
+  });
+
+  // Carrusel simple JS
+  const slides = document.getElementById('slides');
+  let index = 0;
+  const totalSlides = slides.children.length;
+
+  function showSlide(i) {
+    if (i >= totalSlides) index = 0;
+    else if (i < 0) index = totalSlides - 1;
+    else index = i;
+    slides.style.transform = 'translateX(' + (-index * 100) + '%)';
+  }
+  function nextSlide() {
+    showSlide(index + 1);
+  }
+  function prevSlide() {
+    showSlide(index - 1);
+  }
+
+  setInterval(() => nextSlide(), 5000);
+</script>
+
+</body>
+</html>
