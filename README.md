@@ -302,7 +302,7 @@
     <div class="contact-info">
       <p><strong>Teléfono:</strong> +1 234 567 8900</p>
       <p><strong>Email:</strong> contacto@goodtimesradio.com</p>
-      <p><strong>Dirección:</strong> Calle Ejemplo 123, Ciudad, País</p>
+      <p><strong>Dirección:</strong> Granada ,Nicaragua</p>
     </div>
   </section>
 </main>
